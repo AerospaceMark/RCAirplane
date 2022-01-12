@@ -12,8 +12,7 @@ classdef Airplane
         CD_Parasitic = []; % The parasitic drag coefficient
         
         % Wing Properties
-        Wing_Area = []; % ft^2
-        Mean_Aerodynamic_Chord = []; % ft
+        Aspect_Ratio = [];
         Wing_Span = []; % ft
         Inviscid_Efficiency = [];
         
@@ -44,6 +43,8 @@ classdef Airplane
         
     properties (Dependent)
         
+        Wing_Area % ft^2
+        Mean_Aerodynamic_Chord % ft
         Horizontal_Tail_Volume
         Vertical_Tail_Volume
         Wing_Loading % lbs / ft^2
@@ -56,7 +57,6 @@ classdef Airplane
         CL_For_Max_Efficiency
         CL_For_Max_Endurance
         Reynolds_Number
-        Aspect_Ratio
         Range % miles
         Endurance % hours
         Lift_To_Drag_Ratio
@@ -68,6 +68,18 @@ classdef Airplane
         
         
     methods
+        
+        function value = get.Wing_Area(obj)
+            
+            value = obj.Wing_Span.^2 ./ obj.Aspect_Ratio;
+            
+        end
+        
+        function value = get.Mean_Aerodynamic_Chord(obj)
+            
+            value = obj.Wing_Area ./ obj.Wing_Span;
+            
+        end
         
         function value = get.Horizontal_Tail_Volume(obj)
             
@@ -147,12 +159,6 @@ classdef Airplane
         function value = get.Reynolds_Number(obj)
             
             value = obj.Speed .* obj.Mean_Aerodynamic_Chord ./ obj.Kinematic_Viscosity;
-            
-        end
-        
-        function value = get.Aspect_Ratio(obj)
-            
-            value = obj.Wing_Span.^2 ./ obj.Wing_Area;
             
         end
         

@@ -12,9 +12,8 @@ RC.CD_Zero_Lift = 0.01;
 RC.CD_Parasitic = 0.003;
 
 % Wing Properties
-RC.Wing_Area = 12; % feet
 RC.Wing_Span = 8; % feet
-RC.Mean_Aerodynamic_Chord = 1.5; % feet
+RC.Aspect_Ratio = 3:0.1:10;
 RC.Inviscid_Efficiency = 1.0;
 
 % Horizontal Stabilizer Properties
