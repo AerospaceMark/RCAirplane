@@ -8,11 +8,13 @@ classdef Airplane
         Speed = []; % The current speed
         CL = []; % The current lift coefficient
         CD_Zero_Lift = []; % The no-lift drag coefficient
+        CD_Parasitic = []; % The parasitic drag coefficient
         
         % Wing Properties
         Wing_Area = [];
         Mean_Aerodynamic_Chord = [];
         Wing_Span = [];
+        Inviscid_Efficiency = [];
         
         % Horizontal Stabilizer Properties
         Horizontal_Tail_Area = [];
@@ -29,6 +31,7 @@ classdef Airplane
         % Ambient Properties
         Air_Density = [];
         Gravitational_Acceleration = 32.2; % ft/s^2
+        Kinematic_Viscosity = 1.5723e-4; % ft^2/s
         
     end
         
@@ -42,6 +45,9 @@ classdef Airplane
         Dynamic_Pressure
         Takeoff_Distance
         Maximum_Speed
+        CL_For_Max_Efficiency
+        Reynolds_Number
+        Aspect_Ratio
         
     end
         
@@ -111,6 +117,7 @@ classdef Airplane
         function value = get.Maximum_Speed(obj)
             
             % FIXME: Use generalized reference area instead of wing area
+            % FIXME: This may help: https://www.youtube.com/watch?v=QQONGTE_RBw
             
             K = 0.38; % FIXME: What is this?
             value = sqrt((obj.Total_Thrust./obj.Weight).^2 - 4 .* obj.CD_Zero_Lift .* K);
@@ -119,6 +126,25 @@ classdef Airplane
             value = sqrt(value);
             
             value = value .* 0.682; % Convert ft/s to mph
+            
+        end
+        
+        function value = get.Reynolds_Number(obj)
+            
+            value = obj.Speed .* obj.Mean_Aerodynamic_Chord ./ obj.Kinematic_Viscosity;
+            
+        end
+        
+        function value = get.Aspect_Ratio(obj)
+            
+            value = obj.Wing_Span.^2 ./ obj.Wing_Area;
+            
+        end
+        
+        function value = get.CL_For_Max_Efficiency(obj)
+            
+            % FIXME: Use generalized reference area instead of wing area
+            value = sqrt(obj.CD_Parasitic .* pi .* obj.Aspect_Ratio .* obj.Inviscid_Efficiency);
             
         end
         
