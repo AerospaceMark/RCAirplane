@@ -7,7 +7,7 @@ RC.Weight = 15; % pounds
 RC.CL_Max = 1.278;
 RC.CL = 0.227; % the current CL (not max)
 RC.CD = 0.014; % the current CD
-RC.Speed = 29.88; % current speed (mph)
+RC.Speed = 30; % current speed (mph)
 RC.CD_Zero_Lift = 0.01;
 RC.CD_Parasitic = 0.003;
 
@@ -26,9 +26,9 @@ RC.Vertical_Tail_Lever_Arm = 4.8; % ft
 
 % Propulsion Properties
 RC.Propulsion_Power = 680; % Watts
-RC.Total_Thrust = 20; % pounds
-RC.Battery_Weight = 2; % pounds
-RC.Battery_Total_Energy = 1000; % Watt-hours
+RC.Total_Thrust = 14; % pounds
+RC.Battery_Weight = 1.3; % pounds
+RC.Battery_Total_Energy = 9 * 3600;
 RC.Propulsion_Efficiency = 0.5;
 
 % Other
