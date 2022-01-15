@@ -7,7 +7,7 @@ RC.Weight = 15; % pounds
 RC.CL_Max = 1.278;
 RC.CL = 0.41; % the current CL (not max)
 RC.CD = 0.005; % the current CD
-RC.Speed = 50; % current speed (mph)
+RC.Speed = 35; % current speed (mph)
 RC.CD_Zero_Lift = 0.01;
 RC.CD_Parasitic = 0.01;
 
